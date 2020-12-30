@@ -1,6 +1,7 @@
 import React from "react";
-import { Form, Button, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import logo from "../assets/logo.png";
+import Formulario from "../components/login/Formulario";
 
 const LoginView = () => {
   return (
@@ -53,22 +54,10 @@ const LoginView = () => {
           <div className="mb-4">
             <Image src={logo} width="300" />
           </div>
-          <div className="mb-3">
+          <div className="mb-3 mt-3">
             <h2>Iniciar Sesión</h2>
           </div>
-          <Form>
-            <Form.Group controlId="formGroupUser">
-              <Form.Label>Usuario</Form.Label>
-              <Form.Control type="text" placeholder="Ingrese su usuario" />
-            </Form.Group>
-            <Form.Group controlId="formGroupPassword">
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="password" placeholder="Ingrese su contraseña" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
+          <Formulario />
         </div>
       </div>
     </div>
