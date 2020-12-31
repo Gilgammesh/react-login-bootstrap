@@ -1,0 +1,37 @@
+#header {
+  height: 100%;
+  max-height: 65px;
+}
+
+.navbar-brand {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.bg-header {
+  background-color: #eaecef !important;
+}
+
+.text-user-header {
+  color: #1d5287;
+  font-weight: 500;
+  margin-left: 8px;
+  margin-right: 10px;
+}
+
+.icon-user-header {
+  font-size: 22px;
+  color: #0f9ca5;
+}
+
+.bg-logout {
+  background-color: rgb(111, 98, 99, 0.1);
+  cursor: pointer;
+}
+
+.bg-logout:hover {
+  background-color: rgb(111, 98, 99, 0.2);
+}

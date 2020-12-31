@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import { browserName, deviceType } from "react-device-detect";
+import { GoSignIn } from "react-icons/go";
 import validator from "validator";
 import Swal from "sweetalert2";
 import { useForm } from "../../hooks/useForm";
 import { fetchData } from "../../helpers/fetch";
+import { validateFetchData } from "../../helpers/validate";
+import AuthContext from "../../context/AuthContext";
+import types from "../../configs/types";
 
 const Formulario = () => {
+  const history = useHistory();
+  const { dispatch } = useContext(AuthContext);
+
   const initFormValues = {
     username: "",
     password: "",
+    navegador: browserName,
+    dispositivo: deviceType,
   };
   const [formValues, handleInputChange, resetForm] = useForm(initFormValues);
   const { username, password } = formValues;
@@ -16,9 +27,19 @@ const Formulario = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     if (validateForm()) {
-      const result = await fetchData(false, "admin/login", "POST", formValues);
-      resetForm(initFormValues);
-      console.log(result);
+      const result = await fetchData(false, "auth/login", "POST", formValues);
+      if (validateFetchData(result)) {
+        const { usuario, token } = result.data;
+        dispatch({
+          type: types.login,
+          payload: {
+            usuario,
+            token,
+          },
+        });
+        resetForm(initFormValues);
+        history.replace("/");
+      }
     }
   };
 
@@ -79,7 +100,7 @@ const Formulario = () => {
         />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Submit
+        <GoSignIn /> Ingresar
       </Button>
     </Form>
   );

@@ -9,7 +9,6 @@ export const fetchData = async (
   let result = {
     state: false,
     data: null,
-    error: null,
   };
   const token = localStorage.getItem("token") || "";
 
@@ -24,7 +23,11 @@ export const fetchData = async (
     };
   }
   let options = {};
-  if (method !== "GET") {
+  if (method === "GET") {
+    options = {
+      headers: headers,
+    };
+  } else {
     options = {
       method: method, // GET, POST, PUT, DELETE, etc.
       headers: headers,
@@ -38,14 +41,13 @@ export const fetchData = async (
       result = {
         state: true,
         data: data,
-        error: null,
       };
     })
     .catch((err) => {
+      console.log("Fetch conexión", err);
       result = {
         state: false,
         data: null,
-        error: err,
       };
     });
 
